@@ -45,7 +45,7 @@ module.exports = function(Chart) {
 			maxStep: false
 		}
 	};
-	
+
 	var defaultConfig = {
 		position: 'bottom',
 
@@ -86,20 +86,16 @@ module.exports = function(Chart) {
 		var timeOpts = axis.options.time;
 		if (typeof timeOpts.parser === 'string') {
 			return moment(label, timeOpts.parser);
-		}
-		if (typeof timeOpts.parser === 'function') {
+		} else if (typeof timeOpts.parser === 'function') {
 			return timeOpts.parser(label);
-		}
-		// Date objects
-		if (typeof label.getMonth === 'function' || typeof label === 'number') {
+		} else if (typeof label.getMonth === 'function' || typeof label === 'number') {
+			// Date objects
 			return moment(label);
-		}
-		// Moment support
-		if (label.isValid && label.isValid()) {
+		} else if (label.isValid && label.isValid()) {
+			// Moment support
 			return label;
-		}
-		// Custom parsing (return an instance of moment)
-		if (typeof timeOpts.format !== 'string' && timeOpts.format.call) {
+		} else if (typeof timeOpts.format !== 'string' && timeOpts.format.call) {
+			// Custom parsing (return an instance of moment)
 			console.warn('options.time.format is deprecated and replaced by options.time.parser. See http://nnnick.github.io/Chart.js/docs-v2/#scales-time-scale');
 			return timeOpts.format(label);
 		}
@@ -107,6 +103,12 @@ module.exports = function(Chart) {
 		return moment(label, timeOpts.format);
 	}
 
+	/**
+	 * Figure out which is the best unit for the scale
+	 * @param min {Number} scale minimum
+	 * @param max {Number} scale maximum
+	 * @return {String} the unit to use
+	 */
 	function determineUnit(min, max) {
 		var units = Object.keys(time);
 		var maxTicks = 11;
@@ -134,6 +136,13 @@ module.exports = function(Chart) {
 		return unit;
 	}
 
+	/**
+	 * Determines how we scale the unit
+	 * @param min {Number} the scale minimum
+	 * @param max {Number} the scale maximum
+	 * @param unit {String} the unit determined by the {@see determineUnit} method
+	 * @return {Number} the axis step size in milliseconds
+	 */
 	function determineStepSize(min, max, unit) {
 		// Using our unit, figoure out what we need to scale as
 		var maxTicks = 11; // eventually configure this
@@ -157,6 +166,46 @@ module.exports = function(Chart) {
 
 		return unitSizeInMilliSeconds * multiplier;
 	}
+
+	/**
+	 * @function Chart.Ticks.generators.time
+	 * @param generationOptions {ITimeGeneratorOptions} the options for generation
+	 * @param dataRange {IRange} the data range
+	 * @return {Number[]} ticks
+	 */
+	Chart.Ticks.generators.time = function(generationOptions, dataRange) {
+		var ticks = [];
+		var spacing = generationOptions.stepSize;
+		var baseSpacing = generationOptions.baseSize;
+		var niceMin = Math.floor(dataRange.min / baseSpacing) * baseSpacing;
+		var niceMax = Math.ceil(dataRange.max / baseSpacing) * baseSpacing;
+
+		// If min, max and stepSize is set and they make an evenly spaced scale use it.
+		if (generationOptions.min && generationOptions.max && generationOptions.stepSize) {
+			var minMaxDeltaDivisableByStepSize = ((generationOptions.max - generationOptions.min) % generationOptions.stepSize) === 0;
+			if (minMaxDeltaDivisableByStepSize) {
+				niceMin = generationOptions.min;
+				niceMax = generationOptions.max;
+			}
+		}
+
+		var numSpaces = (niceMax - niceMin) / spacing;
+		// If very close to our rounded value, use it.
+		if (helpers.almostEquals(numSpaces, Math.round(numSpaces), spacing / 1000)) {
+			numSpaces = Math.round(numSpaces);
+		} else {
+			numSpaces = Math.ceil(numSpaces);
+		}
+
+		// Put the values into the ticks array
+		ticks.push(generationOptions.min !== undefined ? generationOptions.min : niceMin);
+		for (var j = 1; j < numSpaces; ++j) {
+			ticks.push(niceMin + (j * spacing));
+		}
+		ticks.push(generationOptions.max !== undefined ? generationOptions.max : niceMax);
+
+		return ticks;
+	};
 
 	var TimeScale = Chart.Scale.extend({
 		initialize: function() {
@@ -275,13 +324,14 @@ module.exports = function(Chart) {
 				stepSize = determineStepSize(minTimestamp || dataMin, maxTimestamp || dataMax, unit);
 			}
 
-			var numericGeneratorOptions = {
+			var timeGeneratorOptions = {
 				maxTicks: 11,
 				min: minTimestamp,
 				max: maxTimestamp,
 				stepSize: stepSize,
+				baseSize: time[unit].size
 			};
-			var ticks = me.ticks = Chart.Ticks.generators.linear(numericGeneratorOptions, {
+			var ticks = me.ticks = Chart.Ticks.generators.time(timeGeneratorOptions, {
 				min: dataMin,
 				max: dataMax
 			});
