@@ -31,78 +31,27 @@ var myDoughnutChart = new Chart(ctx, {
 
 The doughnut/pie chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset. For example, the colour of a the dataset's arc are generally set this way.
 
-### label
-**Type:** String
-The label for the dataset which appears in the legend and tooltips.
-
-### backgroundColor
-**Type:** Color[]
-The fill color of the arcs in the dataset. See [Colors](../general/colors.md#colors)
-
-### borderColor
-**Type:** Color[]
-The border color of the arcs in the dataset. See [Colors](../general/colors.md#colors)
-
-### borderWidth
-**Type:** Number[]
-The border width of the arcs in the dataset.
-
-### hoverBackgroundColor
-**Type:** Color[]
-The fill colour of the arcs when hovered.
-
-### hoverBorderColor
-**Type:** Color[]
-The stroke colour of the arcs when hovered.
-
-### hoverBorderWidth
-**Type:** Number[]
-The stroke width of the arcs when hovered.
+| Name | Type | Description
+| ---- | ---- | -----------
+| `label` | `String` | The label for the dataset which appears in the legend and tooltips.
+| `backgroundColor` | `Color[]` | The fill color of the arcs in the dataset. See [Colors](../general/colors.md#colors)
+| `borderColor` | `Color[]` | The border color of the arcs in the dataset. See [Colors](../general/colors.md#colors)
+| `borderWidth` | `Number[]` | The border width of the arcs in the dataset.
+| `hoverBackgroundColor` | `Color[]` | The fill colour of the arcs when hovered.
+| `hoverBorderColor` | `Color[]` | The stroke colour of the arcs when hovered.
+| `hoverBorderWidth` | `Number[]` | The stroke width of the arcs when hovered.
 
 ## Config Options
 
 These are the customisation options specific to Pie & Doughnut charts. These options are merged with the global chart configuration options, and form the options of the chart.
 
-### cutoutPercentage
-**Type:** Number
-**Default:** `50` - for doughnut, `0` - for pie
-The percentage of the chart that is cut out of the middle.
-
-### rotation
-**Type:** Number
-**Default:** `-0.5 * Math.PI`
-Starting angle to draw arcs from
-
-### circumference
-**Type:** Number
-**Default:** `2 * Math.PI`
-Sweep to allow arcs to cover
-
-### animateRotate
-**Type:** Boolean
-**Default:** `true`
-If true, the chart will animate in with a rotation animation. This property is in the `options.animation` object.
-
-```javascript
-options = {
-    animation: {
-        animateRotate: false
-    }
-};
-```
-
-### animateScale
-**Type:** Boolean
-**Default:** `false`
-If true, will animate scaling the chart from the center outwards. This property is in the `options.animation` object.
-
-```javascript
-options = {
-    animation: {
-        animateScale: true
-    }
-};
-```
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| `cutoutPercentage` | `Number` | `50` - for doughnut, `0` - for pie | The percentage of the chart that is cut out of the middle.
+| `rotation` | `Number` | `-0.5 * Math.PI` | Starting angle to draw arcs from.
+| `circumference` | `Number` | `2 * Math.PI` | Sweep to allow arcs to cover
+| `animation.animateRotate` | `Boolean` | `true` | If true, the chart will animate in with a rotation animation. This property is in the `options.animation` object.
+| `animation.animateScale` | `Boolean` | `false` | If true, will animate scaling the chart from the center outwards.
 
 ## Default Options
 

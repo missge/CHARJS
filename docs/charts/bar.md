@@ -15,33 +15,21 @@ The bar chart allows a number of properties to be specified for each dataset. Th
 
 Some properties can be specified as an array. If these are set to an array value, the first value applies to the first bar, the second value to the second bar, and so on.
 
-### label
-**Type:** String
-The label for the dataset which appears in the legend and tooltips.
-
-### xAxisID
-**Type:** String
-The ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis
-
-### yAxisID
-**Type:** String
-The ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
-
-### backgroundColor
-**Type:** Color or Color[]
-The fill color of the bar. See [Colors](../general/colors.md#colors)
-
-### borderColor
-**Type:** Color or Color[] 
-The color of the bar border. See [Colors](../general/colors.md#colors)
-
-### borderWidth
-**Type:** Number or Number[]
-The stroke width of the bar in pixels.
+| Name | Type | Description
+| ---- | ---- | -----------
+| `label` | `String` | The label for the dataset which appears in the legend and tooltips.
+| `xAxisID` | `String` | The ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis
+| `yAxisID` | `String` | The ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
+| `backgroundColor` | `Color/Color[]` | The fill color of the bar. See [Colors](../general/colors.md#colors)
+| `borderColor` | `Color/Color[]` | The color of the bar border. See [Colors](../general/colors.md#colors)
+| `borderWidth` | `Number/Number[]` | The stroke width of the bar in pixels.
+| `borderSkipped` | `String` | Which edge to skip drawing the border for. See [below](#borderSkipped) for details.
+| `hoverBackgroundColor` | `Color/Color[]` | The fill colour of the bars when hovered.
+| `hoverBorderColor` | `Color/Color[]` | The stroke colour of the bars when hovered.
+| `hoverBorderWidth` | `Number/Number[]` | The stroke width of the bars when hovered.
 
 ### borderSkipped
-**Type:** String
-Which edge to skip drawing the border for. This setting is used to avoid drawing the bar stroke at the base of the fill. In general, this does not need to be changed except when creating chart types that derive from a bar chart.
+This setting is used to avoid drawing the bar stroke at the base of the fill. In general, this does not need to be changed except when creating chart types that derive from a bar chart.
 
 Options are:
 * 'bottom'
@@ -49,76 +37,18 @@ Options are:
 * 'top'
 * 'right'
 
-### hoverBackgroundColor
-**Type:** Color or Color[]
-The fill colour of the bars when hovered.
-
-### hoverBorderColor
-**Type:** Color or Color[]
-The stroke colour of the bars when hovered.
-
-### hoverBorderWidth
-**Type:** Number of Number[]
-The stroke width of the bars when hovered.
-
 ## Configuration Options
 
 The bar chart defines the following configuration options. These options are merged with the global chart configuration options, `Chart.defaults.global`, to form the options passed to the chart.
 
-### barPercentage
-**Type:** Number
-**Default:** `0.9`
-Percent (0-1) of the available width each bar should be within the category percentage. 1.0 will take the whole category width and put the bars right next to each other. [Read More](#bar-chart-barpercentage-vs-categorypercentage)
-
-This setting applies to the axis configuration for a bar chart. If axes are added to the chart, this setting will need to be set for each new axis.
-
-```javascript
-options = {
-    scales: {
-        xAxes: [{
-            barPercentage: 0.8
-        }]
-    }
-}
-```
-
-### categoryPercentage
-**Type:** Number
-**Default:** `0.8`
-Percent (0-1) of the available width (the space between the gridlines for small datasets) for each data-point to use for the bars. [Read More](#bar-chart-barpercentage-vs-categorypercentage)
-
-This setting applies to the axis configuration for a bar chart. If axes are added to the chart, this setting will need to be set for each new axis.
-
-```javascript
-options = {
-    scales: {
-        xAxes: [{
-            categoryPercentage: 0.8
-        }]
-    }
-}
-```
-
-### barThickness
-**Types:** Number
-
-Manually set width of each bar in pixels. If not set, the bars are sized automatically using [barPercentage](#barPercentage) and [categoryPercentage](#categoryPercentage);
-
-This setting applies to the axis configuration for a bar chart. If axes are added to the chart, this setting will need to be set for each new axis.
-
-```javascript
-options = {
-    scales: {
-        xAxes: [{
-            barThickness: 25
-        }]
-    }
-}
-```
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| `barPercentage` | `Number` | `0.9` | Percent (0-1) of the available width each bar should be within the category percentage. 1.0 will take the whole category width and put the bars right next to each other. [Read More](#bar-chart-barpercentage-vs-categorypercentage)
+| `categoryPercentage` | `Number` | `0.8` | Percent (0-1) of the available width (the space between the gridlines for small datasets) for each data-point to use for the bars. [Read More](#bar-chart-barpercentage-vs-categorypercentage)
+| `barThickness` | `Number` | | Manually set width of each bar in pixels. If not set, the bars are sized automatically using `barPercentage` and `categoryPercentage`;
+| `gridLines.offsetGridLines` | `Boolean` | `true` | If true, the bars for a particular data point fall between the grid lines. If false, the grid line will go right down the middle of the bars. See [below](#offsetGridLines) for details.
 
 ### offsetGridLines
-**Type:** Boolean
-**Default:** `true`
 If true, the bars for a particular data point fall between the grid lines. If false, the grid line will go right down the middle of the bars. It is unlikely that this will ever need to be changed in practice. It exists more as a way to reuse the axis code by configuring the existing axis slightly differently.
 
 This setting applies to the axis configuration for a bar chart. If axes are added to the chart, this setting will need to be set for each new axis.
@@ -196,9 +126,9 @@ var stackedBar = new Chart(ctx, {
 
 The following dataset properties are specific to stacked bar charts.
 
-### Stack
-**Type:** String
-The ID of the group to which this dataset belongs to (when stacked, each group will be a separate stack)
+| Name | Type | Description
+| ---- | ---- | -----------
+| `stack` | `String` | The ID of the group to which this dataset belongs to (when stacked, each group will be a separate stack)
 
 # Horizontal Bar Chart
 A horizontal bar chart is a variation on a vertical bar chart. It is sometimes used to show trend data, and the comparison of multiple data sets side by side.

@@ -18,64 +18,30 @@ The radar chart allows a number of properties to be specified for each dataset. 
 
 All point* properties can be specified as an array. If these are set to an array value, the first value applies to the first point, the second value to the second point, and so on.
 
-### Label
-**Type:** String
-The label for the dataset which appears in the legend and tooltips.
-
-### backgroundColor
-**Type:** Color
-The fill color under the line. See [Colors](../general/colors.md#colors)
-
-### borderColor
-**Type:** Color
-The color of the line. See [Colors](../general/colors.md#colors)
-
-### borderWidth
-**Type:** Number
-The width of the line in pixels.
-
-### borderDash
-**Type:** Number[]
-Length and spacing of dashes. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setLineDash)
-
-### borderDashOffset
-**Type:** Number
-Offset for line dashes. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)
-
-### borderCapStyle
-**Type:** String
-Cap style of the line. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineCap)
-
-### borderJoinStyle
-**Type:** String
-Line joint style. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin)
-
-### fill
-**Type:** Boolean
-If true, fill the area under the line. The line is filled to the baseline. If the y axis has a 0 value, the line is filled to that point. If the axis has only negative values, the line is filled to the highest value. If the axis has only positive values, it is filled to the lowest value.
-
-### lineTension
-**Type** Number
-Bezier curve tension of the line. Set to 0 to draw straightlines. This option is ignored if monotone cubic interpolation is used.
-
-### pointBackgroundColor
-**Type:** Color or Color[]
-The fill color for points.
-
-### pointBorderColor
-**Type:** Color or Color[]
-The border color for points.
-
-### pointBorderWidth
-**Type:** Number Number[]
-The width of the point border in pixels.
-
-### pointRadius
-**Type:** Number Number[]
-The radius of the point shape. If set to 0, the point is not rendered.
+| Name | Type | Description
+| ---- | ---- | -----------
+| `label` | `String` | The label for the dataset which appears in the legend and tooltips.
+| `backgroundColor` | `Color/Color[]` | The fill color under the line. See [Colors](../general/colors.md#colors)
+| `borderColor` | `Color/Color[]` | The color of the line. See [Colors](../general/colors.md#colors)
+| `borderWidth` | `Number/Number[]` | The width of the line in pixels.
+| `borderDash` | `Number[]` | Length and spacing of dashes. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setLineDash)
+| `borderDashOffset` | `Number` | Offset for line dashes. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)
+| `borderCapStyle` | `String` | Cap style of the line. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineCap)
+| `borderJoinStyle` | `String` | Line joint style. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin)
+| `fill` | `Boolean/String` | How to fill the area under the line. See [details](#fill) below.
+| `lineTension` | `Number` | Bezier curve tension of the line. Set to 0 to draw straightlines. 
+| `pointBackgroundColor` | `Color/Color[]` | The fill color for points.
+| `pointBorderColor` | `Color/Color[]` | The border color for points.
+| `pointBorderWidth` | `Number/Number[]` | The width of the point border in pixels.
+| `pointRadius` | `Number/Number[]` | The radius of the point shape. If set to 0, the point is not rendered.
+| `pointStyle` | `String/String[]/Image/Image[]` | Style of the point. See [details](#pointStyle) below.
+| `pointHitRadius` | `Number/Number[]` | The pixel size of the non-displayed point that reacts to mouse events.
+| `pointHoverBackgroundColor` | `Color/Color[]` | Point background color when hovered.
+| `pointHoverBorderColor` | `Color/Color[]` | Point border color when hovered.
+| `pointHoverBorderWidth` | `Number/Number[]` | Border width of point when hovered.
+| `pointHoverRadius` | `Number/Number[]` | The radius of the point when hovered.
 
 ### pointStyle
-**Type:** String, String[], Image, Image[]
 The style of point. Options are:
 * 'circle'
 * 'cross'
@@ -89,26 +55,6 @@ The style of point. Options are:
 * 'triangle'
 
 If the option is an image, that image is drawn on the canvas using [drawImage](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/drawImage).
-
-### pointHitRadius
-**Type:** Number or Number[]
-The pixel size of the non-displayed point that reacts to mouse events.
-
-### pointHoverBackgroundColor
-**Type:** Color or Color[]
-Point background color when hovered.
-
-### pointHoverBorderColor
-**Type:** Color or Color[]
-Point border color when hovered.
-
-### pointHoverBorderWidth
-**Type:** Number or Number[]
-Border width of point when hovered.
-
-### pointHoverRadius
-**Type:** Number or Number[]
-The radius of the point when hovered.
 
 ## Configuration Options
 

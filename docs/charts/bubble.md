@@ -19,37 +19,16 @@ The bubble chart allows a number of properties to be specified for each dataset.
 
 All properties, except `label` can be specified as an array. If these are set to an array value, the first value applies to the first bubble in the dataset, the second value to the second bubble, and so on.
 
-### label
-**Type:** String
-The label for the dataset which appears in the legend and tooltips.
-
-### backgroundColor
-**Type:** Color or Color[]
-The fill color for bubbles.
-
-### borderColor
-**Type:** Color or Color[]
-The border color for bubbles.
-
-### borderWidth
-**Type:** Number Number[]
-The width of the point bubbles in pixels.
-
-### hoverBackgroundColor
-**Type:** Color or Color[]
-Bubble background color when hovered.
-
-### hoverBorderColor
-**Type:** Color or Color[]
-Bubble border color when hovered.
-
-### hoverBorderWidth
-**Type:** Number or Number[]
-Border width of point when hovered.
-
-### hoverRadius
-**Type:** Number or Number[]
-Additional radius to add to data radius on hover.
+| Name | Type | Description
+| ---- | ---- | -----------
+| `label` | `String` | The label for the dataset which appears in the legend and tooltips.
+| `backgroundColor` | `Color/Color[]` | The fill color for bubbles.
+| `borderColor` | `Color/Color[]` | The border color for bubbles.
+| `borderWidth` | `Number/Number[]` | The width of the point bubbles in pixels.
+| `hoverBackgroundColor` | `Color/Color[]` | Bubble background color when hovered.
+| `hoverBorderColor` | `Color/Color[]` | Bubble border color when hovered.
+| `hoverBorderWidth` | `Number/Number[]` | Border width of point when hovered.
+| `hoverRadius` | `Number/Number[]` | Additional radius to add to data radius on hover.
 
 ## Config Options
 
