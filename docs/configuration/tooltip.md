@@ -265,9 +265,9 @@ The tooltip items passed to the tooltip callbacks implement the following interf
 }
 ```
 
-## External Tooltips
+## External (Custom) Tooltips
 
-You can enable custom tooltips in the global or chart configuration like so:
+Custom tooltips allow you to hook into the tooltip rendering process so that you can render the tooltip in your own custom way. Generally this is used to create an HTML tooltip instead of an oncanvas one. You can enable custom tooltips in the global or chart configuration like so:
 
 ```javascript
 var myPieChart = new Chart(ctx, {
@@ -275,26 +275,73 @@ var myPieChart = new Chart(ctx, {
     data: data,
     options: {
         tooltips: {
-            custom: function(tooltip) {
-                // tooltip will be false if tooltip is not visible or should be hidden
-                if (!tooltip) {
+            custom: function(tooltipModel) {
+                // Tooltip Element
+                var tooltipEl = document.getElementById('chartjs-tooltip');
+
+                // Create element on first render
+                if (!tooltipEl) {
+                    tooltipEl = document.createElement('div');
+                    tooltipEl.id = 'chartjs-tooltip';
+                    tooltipEl.innerHTML = "<table></table>"
+                    document.body.appendChild(tooltipEl);
+                }
+
+                // Hide if no tooltip
+                if (tooltipModel.opacity === 0) {
+                    tooltipEl.style.opacity = 0;
                     return;
                 }
 
-                // Otherwise, tooltip will be an object with all tooltip properties like:
+                // Set caret Position
+                tooltipEl.classList.remove('above', 'below', 'no-transform');
+                if (tooltipModel.yAlign) {
+                    tooltipEl.classList.add(tooltipModel.yAlign);
+                } else {
+                    tooltipEl.classList.add('no-transform');
+                }
 
-                // tooltip.caretSize
-                // tooltip.caretPadding
-                // tooltip.chart
-                // tooltip.cornerRadius
-                // tooltip.fillColor
-                // tooltip.font...
-                // tooltip.text
-                // tooltip.x
-                // tooltip.y
-                // tooltip.caretX
-                // tooltip.caretY
-                // etc...
+                function getBody(bodyItem) {
+                    return bodyItem.lines;
+                }
+
+                // Set Text
+                if (tooltipModel.body) {
+                    var titleLines = tooltipModel.title || [];
+                    var bodyLines = tooltipModel.body.map(getBody);
+
+                    var innerHtml = '<thead>';
+
+                    titleLines.forEach(function(title) {
+                        innerHtml += '<tr><th>' + title + '</th></tr>';
+                    });
+                    innerHtml += '</thead><tbody>';
+
+                    bodyLines.forEach(function(body, i) {
+                        var colors = tooltipModel.labelColors[i];
+                        var style = 'background:' + colors.backgroundColor;
+                        style += '; border-color:' + colors.borderColor;
+                        style += '; border-width: 2px'; 
+                        var span = '<span class="chartjs-tooltip-key" style="' + style + '"></span>';
+                        innerHtml += '<tr><td>' + span + body + '</td></tr>';
+                    });
+                    innerHtml += '</tbody>';
+
+                    var tableRoot = tooltipEl.querySelector('table');
+                    tableRoot.innerHTML = innerHtml;
+                }
+
+                // `this` will be the overall tooltip
+                var position = this._chart.canvas.getBoundingClientRect();
+
+                // Display, position, and set styles for font
+                tooltipEl.style.opacity = 1;
+                tooltipEl.style.left = position.left + tooltipModel.caretX + 'px';
+                tooltipEl.style.top = position.top + tooltipModel.caretY + 'px';
+                tooltipEl.style.fontFamily = tooltipModel._fontFamily;
+                tooltipEl.style.fontSize = tooltipModel.fontSize;
+                tooltipEl.style.fontStyle = tooltipModel._fontStyle;
+                tooltipEl.style.padding = tooltipModel.yPadding + 'px ' + tooltipModel.xPadding + 'px';
             }
         }
     }
@@ -302,3 +349,81 @@ var myPieChart = new Chart(ctx, {
 ```
 
 See `samples/tooltips/line-customTooltips.html` for examples on how to get started.
+
+## Tooltip Model
+The tooltip model contains parameters that can be used to render the tooltip.
+
+```javascript
+{
+    // The items that we are rendering in the tooltip. See Tooltip Item Interface section
+    dataPoints: TooltipItem[],
+
+    // Positioning
+    xPadding: Number,
+    yPadding: Number,
+    xAlign: String,
+    yAlign: String,
+
+    // X and Y properties are the top left of the tooltip
+    x: Number, 
+    y: Number,
+    width: Number,
+    height: Number,
+    // Where the tooltip points to
+    caretX: Number,
+    caretY: Number,
+
+    // Body
+    // The body lines that need to be rendered
+    // Each pbject contains 3 parameters
+    // before: String[] // lines of text before the line with the color square
+    // lines: String[], // lines of text to render as the main item with color square
+    // after: String[], // lines of text to render after the main lines
+    body: Object[],
+    // lines of text that appear after the title but before the body 
+    beforeBody: String[],
+    // line of text that appear after the body and before the footer
+    afterBody: String[],
+    bodyFontColor: Color,
+    _bodyFontFamily: String,
+    _bodyFontStyle: String,
+    _bodyAlign: String,
+    bodyFontSize: Number,
+    bodySpacing: Number,
+
+    // Title
+    // lines of text that form the title
+    title: String[],
+    titleFontColor: Color,
+    _titleFontFamily: String,
+    _titleFontStyle: String,
+    titleFontSize: Number,
+    _titleAlign: String,
+    titleSpacing: Number,
+    titleMarginBottom: Number,
+
+    // Footer
+    // lines of text that form the footer
+    footer: String[],
+    footerFontColor: Color,
+    _footerFontFamily: String,
+    _footerFontStyle: String,
+    footerFontSize: Number,
+    _footerAlign: String,
+    footerSpacing: Number,
+    footerMarginTop: Number,
+
+    // Appearance
+    caretSize: Number,
+    cornerRadius: Number,
+    backgroundColor: Color,
+
+    // colors to render for each item in body[]. This is the color of the squares in the tooltip
+    labelColors: Color[],
+
+    // 0 opacity is a hidden tooltip
+    opacity: Number,
+    legendColorBackground: Color,
+    displayColors: Boolean,
+}
+```
