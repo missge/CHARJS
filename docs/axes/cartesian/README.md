@@ -91,3 +91,44 @@ Flips tick labels around axis, displaying the labels inside the chart instead of
 **Type:** Number
 **Default:** `10`
 Padding between the tick label and the axis. *Note: Only applicable to horizontal scales.*
+
+# Creating Multiple Axes
+
+With cartesian axes, it is possible to create multiple X and Y axes. To do so, you can add multiple configuration objects to the `xAxes` and `yAxes` properties. When adding new axes, it is important to ensure that you specify the type of the new axes as default types are **not** used in this case.
+
+In the example below, we are creating two Y axes. We then use the `yAxisID` property to map the datasets to their correct axes.
+
+```javascript
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        datasets: [{
+            data: [20, 50, 100, 75, 25, 0],
+            label: 'Left dataset'
+
+            // This binds the dataset to the left y axis
+            yAxisID: 'left-y-axis'
+        }, {
+            data: [0.1, 0.5, 1.0, 2.0, 1.5, 0]
+            label: 'Right dataset'
+,m
+            // This binds the dataset to the right y axis
+            yAxisID: 'right-y-axis',
+        }],
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                id: 'left-y-axis',
+                type: 'linear',
+                position: 'left'
+            }, {
+                id: 'right-y-axis',
+                type: 'linear',
+                position: 'right'
+            }]
+        }
+    }
+});
+```
