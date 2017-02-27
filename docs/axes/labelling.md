@@ -6,35 +6,14 @@ When creating a chart, you want to tell the viewer what data they are viewing. T
 
 The scale label configuration is nested under the scale configuration in the `scaleLabel` key. It defines options for the scale title. Note that this only applies to cartesian axes.
 
-### display
-**Type:** Boolean
-**Default:** `false`
-If true, display the axis title.
-
-### labelString
-**Type:** String
-**Default:** `''`
-The text for the title. (i.e. "# of People" or "Respone Choices").
-
-### fontColor
-**Type:** Color
-**Default:** `'#666`
-Font color for scale title.
-
-### fontFamily
-**Type:** String
-**Default:** `"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"`
-Font family for the scale title, follows CSS font-family options.
-
-### fontSize
-**Type:** Number
-**Default:** `12`
-Font size for scale title.
-
-### fontStyle
-**Type:** String
-**Default:** `'normal'`
-Font style for the scale title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+| Name | Type | Default | Description
+| -----| ---- | --------| -----------
+| `display` | `Boolean` | `false` | If true, display the axis title.
+| `labelString` | `String` | `''` | The text for the title. (i.e. "# of People" or "Respone Choices").
+| `fontColor` | Color | `'#666'` | Font color for scale title.
+| `fontFamily` | `String` | `"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"` | Font family for the scale title, follows CSS font-family options.
+| `fontSize` | `Number` | `12` | Font size for scale title.
+| `fontStyle` | `String` | `'normal'` | Font style for the scale title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 
 ## Creating Custom Tick Formats
 
