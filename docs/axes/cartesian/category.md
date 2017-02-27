@@ -4,13 +4,15 @@ The category scale will be familiar to those who have used v1.0. Labels are draw
 
 ## Tick Configuration Options
 
-The category scale provides the following options for configuring tick marks.
+The category scale provides the following options for configuring tick marks. They are nested in the `ticks` sub object.
 
-### min
-**Type:** String
-The minimum item to display. Must be a value in the `labels` array.
+| Name | Type | Default | Description
+| -----| ---- | --------| -----------
+| `min` | `String` | | The minimum item to display. [more...](#min-max-configuration)
+| `max` | `String` | | The maximum item to display. [more...](#min-max-configuration)
 
-In the example below, the x axis would only display "March" through "June".
+## Min Max Configuration
+For both the `min` and `max` properties, the value must be in the `labels` array. In the example below, the x axis would only display "March" through "June".
 
 ```javascript
 let chart = new Chart(ctx, {
@@ -32,7 +34,3 @@ let chart = new Chart(ctx, {
     }
 });
 ```
-
-### max
-**Type:** String
-The maximum item to display. Must be a value in the `labels` array.

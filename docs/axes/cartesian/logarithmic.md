@@ -6,38 +6,7 @@ The logarithmic scale is use to chart numerical data. It can be placed on either
 
 The following options are provided by the logarithmic scale. They are all located in the `ticks` sub options.
 
-### min
-**Type:** Number
-User defined minimum number for the scale, overrides minimum value from data.
-
-```javascript
-let options = {
-    scales: {
-        yAxes: [{
-            type: 'logarithmic',
-            ticks: {
-                // y axis now starts at 1e-03
-                min: 0.001 
-            }
-        }]
-    }
-};
-```
-
-### max
-**Type:** Number
-User defined maximum number for the scale, overrides maximum value from data.
-
-```javascript
-let options = {
-    scales: {
-        yAxes: [{
-            type: 'linear',
-            ticks: {
-                // y axis now ends at 1e06
-                max: 1e06
-            }
-        }]
-    }
-};
-```
+| Name | Type | Default | Description
+| -----| ---- | --------| -----------
+| `min` | `Number` | | User defined minimum number for the scale, overrides minimum value from data.
+| `max` | `Number` | | User defined maximum number for the scale, overrides maximum value from data.

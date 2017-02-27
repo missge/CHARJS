@@ -6,82 +6,18 @@ The time scale is used to display times and dates. When building its ticks, it w
 
 The following options are provided by the time scale. They are all located in the `time` sub options.
 
-### displayFormats
-**Type:** Object
-The following display formats are used to configure how different time units are formed into strings for the axis tick marks. See [moment.js](http://momentjs.com/docs/#/displaying/format/) for the allowable format strings.
-
-Name | Default
---- | ---
-millisecond | 'SSS [ms]'
-second | 'h:mm:ss a'
-minute | 'h:mm:ss a'
-hour | 'MMM D, hA'
-day | 'll'
-week | 'll'
-month | 'MMM YYYY'
-quarter | '[Q]Q - YYYY'
-year | 'YYYY'
-
-For example, to set the display format for the 'quarter' unit to show the month and year, the following config would be passed to the chart constructor.
-
-```javascript
-var chart = new Chart(ctx, {
-    type: 'line',
-    data: data,
-    options: {
-        scales: {
-            xAxes: [{
-                type: 'time',
-                time: {
-                    displayFormats: {
-                        quarter: 'MMM YYYY'
-                    }
-                }
-            }]
-        }
-    }
-})
-```
-
-### isoWeekday
-**Type:** Boolean
-**Default:** `false`
-If true and the unit is set to 'week', iso weekdays will be used.
-
-### max
-**Type:** [Time](#date-formats)
-If defined, this will override the data maximum
-
-### min
-**Type:** [Time](#date-formats)
-If defined, this will override the data minimum
-
-### parser
-**Type:** String or Function
-If defined as a string, it is interpreted as a custom format to be used by moment to parse the date. 
-
-If this is a function, it must return a moment.js object given the appropriate data value.
-
-### round
-**Type:** String
-If defined, dates will be rounded to the start of this unit. See [Time Units](#scales-time-units) below for the allowed units.
-
-### tooltipFormat
-**Type:** String
-The moment js format string to use for the tooltip.
-
-### unit
-**Type:** String
-If defined, will force the unit to be a certain type. See [Time Units](#scales-time-units) section below for details.
-
-### unitStepSize
-**Type:** Number
-The number of units between grid lines.
-
-### minUnit
-**Type:** String
-**Default:** millisecond'
-The minimum display format to be used for a time unit.
+| Name | Type | Default | Description
+| -----| ---- | --------| -----------
+| `displayFormats` | `Object` | | Sets how different time units are displayed. [more...](#display-formats)
+| `isoWeekday` | `Boolean` | `false` | If true and the unit is set to 'week', iso weekdays will be used.
+| `max` | [Time](#date-formats) | | If defined, this will override the data maximum
+| `min` | [Time](#date-formats) | | If defined, this will override the data minimum
+| `parser` | `String` or `Function` | | Custom parser for dates. [more...](#parser)
+| `round` | `String` | `false` | If defined, dates will be rounded to the start of this unit. See [Time Units](#scales-time-units) below for the allowed units.
+| `tooltipFormat` | `String` | | The moment js format string to use for the tooltip.
+| `unit` | `String` | `false` | If defined, will force the unit to be a certain type. See [Time Units](#scales-time-units) section below for details.
+| `unitStepSize` | `Number` | `1` | The number of units between grid lines.
+| `minUnit` | `String` | `millisecond` | The minimum display format to be used for a time unit.
 
 ## Date Formats
 
@@ -118,3 +54,44 @@ var chart = new Chart(ctx, {
     }
 })
 ```
+
+## Display Formats
+The following display formats are used to configure how different time units are formed into strings for the axis tick marks. See [moment.js](http://momentjs.com/docs/#/displaying/format/) for the allowable format strings.
+
+Name | Default
+--- | ---
+millisecond | 'SSS [ms]'
+second | 'h:mm:ss a'
+minute | 'h:mm:ss a'
+hour | 'MMM D, hA'
+day | 'll'
+week | 'll'
+month | 'MMM YYYY'
+quarter | '[Q]Q - YYYY'
+year | 'YYYY'
+
+For example, to set the display format for the 'quarter' unit to show the month and year, the following config would be passed to the chart constructor.
+
+```javascript
+var chart = new Chart(ctx, {
+    type: 'line',
+    data: data,
+    options: {
+        scales: {
+            xAxes: [{
+                type: 'time',
+                time: {
+                    displayFormats: {
+                        quarter: 'MMM YYYY'
+                    }
+                }
+            }]
+        }
+    }
+})
+```
+
+## Parser
+If this property is defined as a string, it is interpreted as a custom format to be used by moment to parse the date. 
+
+If this is a function, it must return a moment.js object given the appropriate data value.
