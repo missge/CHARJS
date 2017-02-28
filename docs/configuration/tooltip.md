@@ -4,30 +4,42 @@
 
 The tooltip configuration is passed into the `options.tooltips` namespace. The global options for the chart tooltips is defined in `Chart.defaults.global.tooltips`.
 
-### enabled
-**Type:** Boolean
-**Default:** `true`
-Are tooltips enabled.
+| Name | Type | Default | Description
+| -----| ---- | --------| -----------
+| `enabled` | `Boolean` | `true` | Are tooltips enabled
+| `custom` | `Function` | `null` | See [custom tooltip](#custom-tooltips) section.
+| `mode` | `String` | `'nearest'` | Sets which elements appear in the tooltip. [more...](../general/interactions/modes.md#interaction-modes).
+| `intersect` | `Boolean` | `true` | if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode will be applied at all times.
+| `position` | `String` | `'average'` | The mode for positioning the tooltip. [more...](#position-modes)
+| `itemSort` | `Function` | | Sort tooltip items. [more...](#sort-callback)
+| `filter` | `Function` | | Filter tooltip items. [more...](#filter-callback)
+| `backgroundColor` | Color | `'rgba(0,0,0,0.8)'` | Background color of the tooltip.
+| `titleFontFamily` | `String` | `"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"` | title font
+| `titleFontSize` | `Number` | `12` | Title font size
+| `titleFontStyle` | `String` | `'bold'` | Title font style
+| `titleFontColor` | Color | `'#fff'` | Title font color
+| `titleSpacing` | `Number` | `2` | Spacing to add to top and bottom of each title line.
+| `titleMarginBottom` | `Number` | `6` | Margin to add on bottom of title section.
+| `bodyFontFamily` | `String` | `"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"` | body line font
+| `bodyFontSize` | `Number` | `12` | Body font size
+| `bodyFontStyle` | `String` | `'normal'` | Body font style
+| `bodyFontColor` | Color | `'#fff'` | Body font color
+| `bodySpacing` | `Number` | `2` | Spacing to add to top and bottom of each tooltip item.
+| `footerFontFamily` | `String` | `"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"` | footer font
+| `footerFontSize` | `Number` | `12` | Footer font size
+| `footerFontStyle` | `String` | `'bold'` | Footer font style
+| `footerFontColor` | Color | `'#fff'` | Footer font color
+| `footerSpacing` | `Number` | `2` | Spacing to add to top and bottom of each fotter line.
+| `footerMarginTop` | `Number` | `6` | Margin to add before drawing the footer.
+| `xPadding` | `Number` | `6` | Padding to add on left and right of tooltip.
+| `yPadding` | `Number` | `6` | Padding to add on top and bottom of tooltip.
+| `caretSize` | `Number` | `5` | Size, in px, of the tooltip arrow.
+| `cornerRadius` | `Number` | `6` | Radius of tooltip corner curves.
+| `multiKeyBackground` | Color | `'#fff'` | Color to draw behind the colored boxes when multiple items are in the tooltip
+| `displayColors` | `Boolean` | `true` | if true, color boxes are shown in the tooltip
 
-### custom
-**Type:** Function
-**Default:** `null`
-See [custom tooltip](#custom-tooltips) section.
-
-### mode
-**Type:** String
-**Default:** `'nearest'`
-Sets which elements appear in the tooltip. See [Interaction Modes](../general/interactions/modes.md#interaction-modes) for details.
-
-### intersect
-**Type:** Boolean
-**Default:** `true`
-if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode will be applied at all times.
-
-### position
-**Type:** String
-**Default:** `'average'`
-The mode for positioning the tooltip. Possible modes are:
+### Position Modes
+ Possible modes are:
 * 'average'
 * 'nearest'
 
@@ -35,135 +47,13 @@ The mode for positioning the tooltip. Possible modes are:
 
 New modes can be defined by adding functions to the Chart.Tooltip.positioners map.
 
-### itemSort
-**Type:** Function
-**Default:** `undefined`
+### Sort Callback
+
 Allows sorting of [tooltip items](#chart-configuration-tooltip-item-interface). Must implement at minimum a function that can be passed to [Array.prototype.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).  This function can also accept a third parameter that is the data object passed to the chart.
 
-### filter
-**Type:** Function
-**Default:** `undefined`
+### Filter Callback
+
 Allows filtering of [tooltip items](#chart-configuration-tooltip-item-interface). Must implement at minimum a function that can be passed to [Array.prototype.filter](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/filter). This function can also accept a second parameter that is the data object passed to the chart.
-
-### backgroundColor
-**Type:** Color
-**Default:** `'rgba(0,0,0,0.8)'`
-Background color of the tooltip.
-
-### titleFontFamily
-**Type:** String
-**Default:** `"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"`
-Font family for tooltip title inherited from global font family.
-
-### titleFontSize
-**Type:** Number
-**Default:** `12`
-Font size for tooltip title inherited from global font size
-
-### titleFontStyle
-**Type:** String
-**Default:** `'bold'`
-Font style for the tooltip title.
-
-### titleFontColor
-**Type:** Color
-**Default:** `'#fff'`
-Font color for tooltip title
-
-### titleSpacing
-**Type:** Number
-**Default:** `2`
-Spacing to add to top and bottom of each title line.
-
-### titleMarginBottom
-**Type:** Number
-**Default:** `6`
-Margin to add on bottom of title section.
-
-### bodyFontFamily
-**Type:** String
-**Default:** `"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"`
-Font family for tooltip items inherited from global font family
-
-### bodyFontSize
-**Type:** Number
-**Default:** `12`
-Font size for tooltip items inherited from global font size.
-
-### bodyFontStyle
-**Type:** String
-**Default:** `'normal'`
-Font style for the body lines of the tooltip.
-
-### bodyFontColor
-**Type:** Color
-**Default:** `'#fff'`
-Font color for tooltip items.
-
-### bodySpacing
-**Type:** Number
-**Default:** `2`
-Spacing to add to top and bottom of each tooltip item.
-
-### footerFontFamily
-**Type:** String
-**Default:** `"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"`
-Font family for tooltip footer inherited from global font family.
-
-### footerFontSize
-**Type:** Number
-**Default:** `12`
-Font size for tooltip footer inherited from global font size.
-
-### footerFontStyle
-**Type:** String
-**Default:** `'bold'`
-Font style for tooltip footer.
-
-### footerFontColor
-**Type:** Color
-**Default:** `'#fff'`
-Font color for tooltip footer.
-
-### footerSpacing
-**Type:** Number
-**Default:** `2`
-Spacing to add to top and bottom of each footer line.
-
-### footerMarginTop
-**Type:** Number
-**Default:** `6`
-Margin to add before drawing the footer.
-
-### xPadding
-**Type:** Number
-**Default:** `6`
-Padding to add on left and right of tooltip.
-
-### yPadding
-**Type:** Number
-**Default:** `6`
-Padding to add on top and bottom of tooltip.
-
-### caretSize
-**Type:** Number
-**Default:** `5`
-Size, in px, of the tooltip arrow.
-
-### cornerRadius
-**Type:** Number
-**Default:** `6`
-Radius of tooltip corner curves.
-
-### multiKeyBackground
-**Type:** Color
-**Default:** `'#fff'`
-Color to draw behind the colored boxes when multiple items are in the tooltip
-
-### displayColors
-**Type:** Boolean
-**Default:** `true`
-if true, color boxes are shown in the tooltip
 
 ## Tooltip Callbacks
 

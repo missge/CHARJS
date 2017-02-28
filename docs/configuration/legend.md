@@ -5,92 +5,38 @@ The chart legend displays data about the datasets that area appearing on the cha
 ## Configuration options
 The legend configuration is passed into the `options.legend` namespace. The global options for the chart legend is defined in `Chart.defaults.global.legend`.
 
-### display
-**Type:** Boolean
-**Default:** `true`
-Is the legend displayed.
+| Name | Type | Default | Description
+| -----| ---- | --------| -----------
+| `display` | `Boolean` | `true` | is the legend shown
+| `position` | `String` | `'top'` | Position of the legend. [more...](#position)
+| `fullWidth` | `Boolean` | `true` | Marks that this box should take the full width of the canvas (pushing down other boxes). This is unlikely to need to be changed in day-to-day use.
+| `onClick` | `Function` | | A callback that is called when a click event is registered on a label item 
+| `onHover` | `Function` | | A callback that is called when a 'mousemove' event is registered on top of a label item
+| `reverse` | `Boolean` | `false` | Legend will show datasets in reverse order.
+| `labels` | `Object` | | See the [Legend Label Configuration](#legend-label-configuration) section below.
 
-### position
-**Type:** String
-**Default:** `'top'`
+## Position
 Position of the legend. Options are:
 * `'top'`
 * `'left'`
 * `'bottom'`
 * `'right'`
 
-### fullWidth
-**Type:** Boolean
-**Default:** `true`
-Marks that this box should take the full width of the canvas (pushing down other boxes). This is unlikely to need to be changed in day-to-day use.
-
-### onClick
-**Type:** Function
-**Default:** `function(event, legendItem) {}`
-A callback that is called when a 'click' event is registered on top of a label item.
-
-### onHover
-**Type:** Function
-**Default:** `function(event, legendItem) {}`
-A callback that is called when a 'mousemove' event is registered on top of a label item
-
-### labels
-**Type:** Object
-See the [Legend Label Configuration](#legend-label-configuration) section below.
-
-### reverse
-**Type:** Boolean
-**Default:** `false`
-Legend will show datasets in reverse order.
-
 ## Legend Label Configuration
 
 The legend label configuration is nested below the legend configuration using the `labels` key.
 
-### boxWidth
-**Type:** Number
-**Boolean:** `40`
-Width of coloured box.
-
-### fontSize
-**Type:** Number
-**Boolean:** `12`
-Font size of text in legend.
-
-### fontStyle
-**Type:** String
-**Boolean:** `'normal'`
-Font style of text in the legend.
-
-### fontColor
-**Type:** Color
-**Boolean:** `'#666'`
-Font color of text in legend.
-
-### fontFamily
-**Type:** String
-**Boolean:** `"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"`
-Font family of legend text.
-
-### padding
-**Type:** Number
-**Boolean:** `10`
-Padding between rows of colored boxes.
-
-### generateLabels
-**Type:** Function
-**Boolean:** `function(chart) {  }`
-Generates legend items for each thing in the legend. Default implementation returns the text + styling for the color box. See [Legend Item](#chart-configuration-legend-item-interface) for details.
-
-### filter
-**Type:** Function
-**Boolean:** `null`
-Filters legend items out of the legend. Receives 2 parameters, a [Legend Item](#chart-configuration-legend-item-interface) and the chart data.
-
-### usePointStyle
-**Type:** Boolean
-**Boolean:** `false`
-Label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
+| Name | Type | Default | Description
+| -----| ---- | --------| -----------
+| `boxWidth` | `Number` | `40` | width of coloured box
+| `fontSize` | `Number` | `12` | font size of text
+| `fontStyle` | `String` | `'normal'` | font style of text
+| `fontColor` | Color | `'#666'` | Color of text
+| `fontFamily` | `String` | `"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"` | Font family of legend text.
+| `padding` | `Number` | `10` | Padding between rows of colored boxes.
+| `generateLabels` | `Function` | | Generates legend items for each thing in the legend. Default implementation returns the text + styling for the color box. See [Legend Item](#chart-configuration-legend-item-interface) for details.
+| `filter` | `Function` | `null` | Filters legend items out of the legend. Receives 2 parameters, a [Legend Item](#chart-configuration-legend-item-interface) and the chart data.
+| `usePointStyle` | `Boolean` | `false` | Label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
 
 ## Legend Item Interface
 

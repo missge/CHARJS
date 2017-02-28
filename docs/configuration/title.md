@@ -5,49 +5,23 @@ The chart title defines text to draw at the top of the chart.
 ## Title Configuration
 The title configuration is passed into the `options.title` namespace. The global options for the chart title is defined in `Chart.defaults.global.title`.
 
-### display
-**Type:** Boolean
-**Default:** `false`
-If true, the title block is displayed.
+| Name | Type | Default | Description
+| -----| ---- | --------| -----------
+| `display` | `Boolean` | `false` | is the title shown
+| `position` | `String` | `'top'` | Position of title. [more...](#position)
+| `fontSize` | `Number` | `12` | Font size
+| `fontFamily` | `String` |  `"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"` | Font family for the title text.
+| `fontColor` | Color | `'#666'` | Font color
+| `fontStyle` | `String` | `'bold'` | Font style
+| `padding` | `Number` | `10` | Number of pixels to add above and below the title text.
+| `text` | `String` | `''` | Title text ti display
 
-### position
-**Type:** String
-**Default:** `'top'`
-Position of the title. Possible values are:
+### Position
+Possible title position values are:
 * `'top'`
 * `'left'`
 * `'bottom'`
 * `'right'`
-
-### fontSize
-**Type:** Number
-**Default:** `12`
-Font size of the title text.
-
-### fontFamily
-**Type:** String
-**Default:** `"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"`
-Font family for the title text.
-
-### fontColor
-**Type:** Color
-**Default:** `'#666`
-Font color inherited from global configuration.
-
-### fontStyle
-**Type:** String
-**Default:** `'bold`
-Font styling of the title text.
-
-### padding
-**Type:** Number
-**Default:** `10`
-Number of pixels to add above and below the title text.
-
-### text
-**Type:** String
-**Default:** `''`
-The title text to display.
 
 ## Example Usage
 
