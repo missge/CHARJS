@@ -39,7 +39,7 @@
   * [Labelling](axes/labelling.md)
   * [Styling](axes/styling.md)
 * [Developers](developers/README.md)
-  * [Chart.js API](advanced/api.md)
+  * [Chart.js API](developers/api.md)
   * [Plugins](developers/plugins.md)
   * [New Charts](developers/charts.md)
   * [New Axes](developers/axes.md)
